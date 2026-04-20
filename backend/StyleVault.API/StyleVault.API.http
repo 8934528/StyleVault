@@ -1,0 +1,6 @@
+@StyleVault.API_HostAddress = http://localhost:5083
+
+GET {{StyleVault.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

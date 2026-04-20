@@ -1,0 +1,6 @@
+﻿namespace StyleVault.Shared;
+
+public class Class1
+{
+
+}

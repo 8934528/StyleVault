@@ -1,0 +1,11 @@
+obj
+bin
+
+StyleVault.API.csproj.user
+StyleVault.API.sln.docstates
+
+.vs
+*.user
+
+Structure.md
+
