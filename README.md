@@ -1,5 +1,12 @@
 # StyleVault
 
+![C# 12](https://img.shields.io/badge/C%23-12-blue.svg)
+![ASP.NET Core 8](https://img.shields.io/badge/ASP.NET%20Core-8.0-blue.svg)
+![EF Core](https://img.shields.io/badge/EF%20Core-8.0-blue.svg)
+![React](https://img.shields.io/badge/React-18-blue.svg)
+![Vite](https://img.shields.io/badge/Vite-5-purple.svg)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple.svg)
+![SQLite](https://img.shields.io/badge/SQLite-3-blue.svg)
 ---
 **StyleVault** is an interactive, progressive card-opening web game featuring an expansive, controlled RTP (Return To Player) model with stunning UI/UX and dynamic animations.
 

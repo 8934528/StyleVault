@@ -24,7 +24,7 @@ export const useBackgroundMusic = () => {
         }
 
         if (musicEnabled) {
-            audioRef.current.src = \`/src/assets/sounds/Background_Music/\${currentTrack}\`;
+            audioRef.current.src = `/src/assets/sounds/Background_Music/${currentTrack}`;
             audioRef.current.play().catch(e => console.log('BGM blocked by browser:', e));
         } else {
             audioRef.current.pause();
