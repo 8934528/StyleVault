@@ -15,12 +15,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configure PostgreSQL Database using Env
-var connectionString = $"Host={Env.GetString("DB_HOST", "localhost")};Port={Env.GetString("DB_PORT", "5432")};Database={Env.GetString("DB_NAME", "stylevault")};Username={Env.GetString("DB_USER", "postgres")};Password={Env.GetString("DB_PASSWORD", "8934528")}";
-
+// Configure SQLite Database
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(connectionString));
+    options.UseSqlite("Data Source=stylevault.db"));
 
+builder.Services.AddScoped<IAppDbContext>(provider => provider.GetRequiredService<AppDbContext>());
 // Injection
 builder.Services.AddApplicationServices();
 
