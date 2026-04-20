@@ -1,0 +1,11 @@
+{
+    "configName": "StyleVault Baseline",
+    "targetRTP": 0.70,
+    "packCost": 20.0,
+    "rules": {
+        "maxJackpotsPerPack": 1,
+        "slot1": ["Common"],
+        "slot2": ["Common", "Mid"],
+        "slot3": ["Common", "Mid", "Rare", "Jackpot"]
+    }
+}
