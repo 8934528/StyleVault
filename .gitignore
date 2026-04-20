@@ -39,3 +39,8 @@ frontend/.env.local
 Structure.md
 .github
 package-lock.json
+
+# Database
+stylevault.db
+stylevault.db-shm
+stylevault.db-wal
