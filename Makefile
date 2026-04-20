@@ -22,7 +22,6 @@ init: check
 	cd backend && dotnet restore
 
 run-db:
-	docker-compose up -d db
 
 run-api:
 	cd backend/StyleVault.API && dotnet run

@@ -20,12 +20,12 @@ const Settings = () => {
           
           <div className="form-check form-switch mb-3">
             <input className="form-check-input" type="checkbox" role="switch" id="musicSwitch" checked={musicEnabled} onChange={toggleMusic} />
-            <label className="form-check-label" htmlFor="musicSwitch">Enable Background Music</label>
+            <label className="form-check-label" htmlFor="musicSwitch">Background Music</label>
           </div>
 
           <div className="form-check form-switch mb-4">
             <input className="form-check-input" type="checkbox" role="switch" id="sfxSwitch" checked={sfxEnabled} onChange={toggleSfx} />
-            <label className="form-check-label" htmlFor="sfxSwitch">Enable Sound Effects</label>
+            <label className="form-check-label" htmlFor="sfxSwitch">Sound Effects</label>
           </div>
 
           <div className="mb-3">

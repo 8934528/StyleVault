@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 export const useGameStore = create((set) => ({
-  user: { username: 'Player1', coins: 80 }, // starts with 80 (2 packs)
+  user: { username: 'Player1', coins: 100 }, // starts with 100 (2 packs)
   addCoins: (amount) => set((state) => ({ user: { ...state.user, coins: state.user.coins + amount } })),
   deductCoins: (amount) => set((state) => ({ user: { ...state.user, coins: state.user.coins - amount } }))
 }));
