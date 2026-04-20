@@ -1,20 +1,24 @@
-import React from 'react';
-import { useGameStore } from '../store/uiStore';
+import React, { useContext } from 'react';
+import { GameContext } from '../store/GameContext';
 
 const Profile = () => {
-  const { user } = useGameStore();
+  const { user, coins } = useContext(GameContext);
 
   return (
-    <div className="row">
-      <div className="col-md-6 offset-md-3">
+    <div className="row justify-content-center">
+      <div className="col-md-6">
         <div className="card bg-dark text-white p-4 border-secondary">
-          <h3><i className="fi fi-rr-user"></i> Profile</h3>
+          <div className="text-center">
+            <i className="bi bi-person-circle fs-1"></i>
+            <h3>{user?.username || 'Player'}</h3>
+          </div>
           <hr />
-          <p><strong>Username:</strong> {user?.username}</p>
-          <p><strong>Balance:</strong> ZAR {user?.coins}</p>
+          <p><strong>Balance:</strong> R {coins}</p>
+          <p><strong>Member since:</strong> {new Date().toLocaleDateString()}</p>
         </div>
       </div>
     </div>
   );
 };
+
 export default Profile;

@@ -1,47 +1,48 @@
 import React from 'react';
 import { useSettingsStore } from '../store/uiStore';
+import Button from '../components/UI/Button';
+import Swal from 'sweetalert2';
 
 const Settings = () => {
-  const { musicEnabled, sfxEnabled, currentTrack, toggleMusic, toggleSfx, setTrack } = useSettingsStore();
+  const { musicEnabled, sfxEnabled, toggleMusic, toggleSfx } = useSettingsStore();
 
-  const tracks = [
-    'BigBeatBackgroundMusic.mp3',
-    'MerxBackgroundMusic.mp3',
-    'RelaxedBackgroundMusic.mp3',
-    'SeriousBackgroundMusic.mp3'
-  ];
+  const resetGame = () => {
+    Swal.fire({
+      title: 'Reset Game?',
+      text: 'This will reset your balance to R100 and clear inventory.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#eab308',
+      confirmButtonText: 'Yes, reset'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        window.location.reload();
+      }
+    });
+  };
 
   return (
-    <div className="row">
-      <div className="col-md-6 offset-md-3">
-        <div className="card bg-dark text-white p-4">
-          <h3><i className="fi fi-rr-settings"></i> Settings</h3>
+    <div className="row justify-content-center">
+      <div className="col-md-6">
+        <div className="card bg-dark text-white p-4 border-secondary">
+          <h3><i className="bi bi-sliders2"></i> Settings</h3>
           <hr />
-          
-          <div className="form-check form-switch mb-3">
-            <input className="form-check-input" type="checkbox" role="switch" id="musicSwitch" checked={musicEnabled} onChange={toggleMusic} />
-            <label className="form-check-label" htmlFor="musicSwitch">Background Music</label>
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <span><i className="bi bi-music-note"></i> Background Music</span>
+            <button className={`btn ${musicEnabled ? 'btn-warning' : 'btn-secondary'}`} onClick={toggleMusic}>
+              {musicEnabled ? 'ON' : 'OFF'}
+            </button>
           </div>
-
-          <div className="form-check form-switch mb-4">
-            <input className="form-check-input" type="checkbox" role="switch" id="sfxSwitch" checked={sfxEnabled} onChange={toggleSfx} />
-            <label className="form-check-label" htmlFor="sfxSwitch">Sound Effects</label>
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <span><i className="bi bi-soundwave"></i> Sound Effects</span>
+            <button className={`btn ${sfxEnabled ? 'btn-warning' : 'btn-secondary'}`} onClick={toggleSfx}>
+              {sfxEnabled ? 'ON' : 'OFF'}
+            </button>
           </div>
-
-          <div className="mb-3">
-            <label className="form-label">Background Track</label>
-            <select 
-              className="form-select bg-secondary text-white" 
-              value={currentTrack} 
-              onChange={(e) => setTrack(e.target.value)}
-              disabled={!musicEnabled}
-            >
-              {tracks.map(track => (
-                <option key={track} value={track}>{track.replace('.mp3', '')}</option>
-              ))}
-            </select>
-          </div>
-          
+          <Button variant="danger" onClick={resetGame}>
+            <i className="bi bi-arrow-repeat"></i> Reset Game Progress
+          </Button>
         </div>
       </div>
     </div>
