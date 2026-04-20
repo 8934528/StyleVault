@@ -13,7 +13,6 @@ dist-ssr/
 *.njsproj
 *.sln.docstates
 
-package-lock.json
 .env
 .env.local
 .env.development.local

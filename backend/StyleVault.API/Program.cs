@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using StyleVault.Application.Interfaces;
 using StyleVault.Application.Services;
 using StyleVault.Infrastructure.Data;
+using StyleVault.API.Extensions;
 using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,17 +15,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configure PostgreSQL Database using Env Vars
+// Configure PostgreSQL Database using Env
 var connectionString = $"Host={Env.GetString("DB_HOST", "localhost")};Port={Env.GetString("DB_PORT", "5432")};Database={Env.GetString("DB_NAME", "stylevault")};Username={Env.GetString("DB_USER", "postgres")};Password={Env.GetString("DB_PASSWORD", "8934528")}";
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 
-// Dependency Injection
-builder.Services.AddSingleton<ProbabilityEngine>();
-builder.Services.AddScoped<IPackService, PackService>();
+// Injection
+builder.Services.AddApplicationServices();
 
-// CORS Setup (allow Vite frontend)
+// CORS Setup
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
@@ -41,12 +41,10 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    // Automatically apply migrations and seed
     context.Database.EnsureCreated();
     DbSeeder.SeedCards(context);
 }
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

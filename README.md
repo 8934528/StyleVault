@@ -1,3 +1,39 @@
 # StyleVault
 
-The game will be about users buying a pack (20 rand), a pack has 3 cards, each card has faces or things with less value (how much you get for finding that card), some with no value(get nohing for finding this card), the cards with less value vary from 5-11 rands depending on which face or thing the card has, then the will be pecial cards "card 2 (worth 35 rands if you can find it), card 360 (worth 25 if you can find it), card zar (worth 45 if you can find it), card <card "named of this game"> (worth 70 if you can find it) There must be a huge, beautiful logic on how many combinations with each card in a pack that has 3 cards, and some deductions and deviations As cards are worth more the must be less chance for them to be found (the probabilities for the cards that are worth more to be found must be less), and the probabilities must be calculated accordingly with different percentages, where the cards worth nothing get to have a high probability to appear or be found
+---
+**StyleVault** is an interactive, progressive card-opening web game featuring an expansive, controlled RTP (Return To Player) model with stunning UI/UX and dynamic animations.
+
+In StyleVault, players can purchase packs using in-game currency. Each pack contains exactly 3 cards, dropping randomized visual elements and varying value returns.
+
+---
+
+## Core Gameplay
+
+- **Pack Price**: 20 Rands
+- **Cards Per Pack**: 3 Cards
+- **Currencies**: Zar (in-game virtual currency)
+
+## Card Value and Tier List
+
+Cards are divided into categories based on their rarity and payout value. Higher-valued cards have significantly lower drop rates, dynamically scaled by the platform's probability engine to maintain balanced game economy.
+
+| Card Rarity / Tier | Target Drop Value | Description |
+|--------------------|-------------------|-------------|
+| **Common (Low)**   | 0 Rands           | "No Value" cards. Highly common pulls with no monetary return. |
+| **Uncommon**       | 5 - 11 Rands      | Standard reward cards, providing small to moderate value returns. |
+| **Rare (Special)** | 25 Rands          | Ex: "Card 360". Specialized card with a high drop return. |
+| **Epic (Special)** | 35 Rands          | Ex: "Card 2". Exciting drops with a premium return. |
+| **Legendary**      | 45 Rands          | Ex: "Card Zar". Highly valuable item drop. |
+| **Mythic (Ultra)** | 70 Rands          | Ex: "StyleVault Card". The pinnacle drop—extremely rare. |
+
+---
+
+## Game Mechanics
+
+- **Probability System**: Dynamic outcome combinations ensure that lower-value cards appear frequently, while valuable (Epic, Legendary, Mythic) cards trigger rare events.
+
+- **RTP Deductions**: A complex mathematical calculation applies probability weighting based on current combinations.
+
+- **Controlled System**: Rigorous limits prevent extreme exploitation.
+
+---

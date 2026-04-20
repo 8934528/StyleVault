@@ -1,12 +1,41 @@
-obj
-bin
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
 
-StyleVault.API.csproj.user
-StyleVault.API.sln.docstates
-
-.vs
+# Visual Studio files
+.vs/
 *.user
+*.suo
+*.userosscache
+*.sln.docstates
 
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+
+# Docker & Auth
+.env
+*.local
+
+# Other
+*.log
 Structure.md
-
 .github
+package-lock.json

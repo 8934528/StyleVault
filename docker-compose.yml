@@ -5,9 +5,9 @@ services:
     image: postgres:16
     container_name: stylevault-db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 8934528
-      POSTGRES_DB: stylevault
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-devpassword123}
+      POSTGRES_DB: ${POSTGRES_DB:-stylevault}
     ports:
       - "5432:5432"
     volumes:
@@ -27,8 +27,8 @@ services:
       - DB_HOST=db
       - DB_PORT=5432
       - DB_NAME=stylevault
-      - DB_USER=postgres
-      - DB_PASSWORD=8934528
+      - DB_USER=${POSTGRES_USER:-postgres}
+      - DB_PASSWORD=${POSTGRES_PASSWORD:-devpassword123}
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
       - db
