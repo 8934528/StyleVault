@@ -22,8 +22,8 @@ check:
 	@echo "All required tools are installed."
 
 init: check
-	cd frontend && npm install
 	cd backend && dotnet restore
+	cd frontend && npm install
 
 run-db:
 
