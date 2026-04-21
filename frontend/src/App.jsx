@@ -4,8 +4,10 @@ import { GameContext } from './store/GameContext';
 import logo from '/logo.png'; 
 
 const App = ({ children }) => {
-  const { coins, isLoading } = useContext(GameContext);
+  const { user, coins, isLoading } = useContext(GameContext);
   const navigate = useNavigate();
+
+  const isNavDisabled = !user;
 
   return (
     <div className="app-container">
@@ -22,22 +24,28 @@ const App = ({ children }) => {
         </Link>
       </header>
 
-      <main className="app-main">{children}</main>
+      <main className="app-main page-fade-in" key={window.location.pathname}>
+        {children}
+      </main>
 
       <nav className="bottom-nav">
-        <Link to="/dashboard" className="nav-item">
+        <Link to="/dashboard" className={`nav-item ${isNavDisabled ? 'disabled' : ''}`}>
           <i className="bi bi-grid-3x3-gap-fill"></i>
           <span>Dashboard</span>
         </Link>
-        <Link to="/openpack" className="nav-item">
+        <Link to="/openpack" className={`nav-item ${isNavDisabled ? 'disabled' : ''}`}>
           <i className="bi bi-gift-fill"></i>
           <span>Open Pack</span>
         </Link>
-        <Link to="/inventory" className="nav-item">
+        <Link to="/history" className={`nav-item ${isNavDisabled ? 'disabled' : ''}`}>
+          <i className="bi bi-clock-history"></i>
+          <span>History</span>
+        </Link>
+        <Link to="/inventory" className={`nav-item ${isNavDisabled ? 'disabled' : ''}`}>
           <i className="bi bi-box-seam-fill"></i>
           <span>Inventory</span>
         </Link>
-        <Link to="/profile" className="nav-item">
+        <Link to="/profile" className={`nav-item ${isNavDisabled ? 'disabled' : ''}`}>
           <i className="bi bi-person-fill"></i>
           <span>Profile</span>
         </Link>

@@ -9,8 +9,12 @@ export const useGameStore = create((set) => ({
 export const useSettingsStore = create((set) => ({
   musicEnabled: true,
   sfxEnabled: true,
+  musicVolume: 0.5,
+  sfxVolume: 0.7,
   currentTrack: 'SeriousBackgroundMusic.mp3',
   toggleMusic: () => set((state) => ({ musicEnabled: !state.musicEnabled })),
   toggleSfx: () => set((state) => ({ sfxEnabled: !state.sfxEnabled })),
+  setMusicVolume: (vol) => set({ musicVolume: vol }),
+  setSfxVolume: (vol) => set({ sfxVolume: vol }),
   setTrack: (track) => set({ currentTrack: track })
 }));

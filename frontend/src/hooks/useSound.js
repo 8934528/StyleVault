@@ -2,11 +2,12 @@ import { useEffect, useRef } from 'react';
 import { useSettingsStore } from '../store/uiStore';
 
 export const useSound = () => {
-  const { sfxEnabled } = useSettingsStore();
+  const { sfxEnabled, sfxVolume } = useSettingsStore();
 
   const playSfx = (soundFile) => {
     if (!sfxEnabled) return;
     const audio = new Audio(`/src/assets/sounds/${soundFile}`);
+    audio.volume = sfxVolume;
     audio.play().catch(e => console.log('Audio play blocked:', e));
   };
 
@@ -14,7 +15,7 @@ export const useSound = () => {
 };
 
 export const useBackgroundMusic = () => {
-    const { musicEnabled, currentTrack } = useSettingsStore();
+    const { musicEnabled, currentTrack, musicVolume } = useSettingsStore();
     const audioRef = useRef(null);
 
     useEffect(() => {
@@ -22,6 +23,8 @@ export const useBackgroundMusic = () => {
             audioRef.current = new Audio();
             audioRef.current.loop = true;
         }
+
+        audioRef.current.volume = musicVolume;
 
         if (musicEnabled) {
             audioRef.current.src = `/src/assets/sounds/Background_Music/${currentTrack}`;
@@ -35,9 +38,8 @@ export const useBackgroundMusic = () => {
                 audioRef.current.pause();
             }
         }
-    }, [musicEnabled, currentTrack]);
+    }, [musicEnabled, currentTrack, musicVolume]);
     
-    // Allow re-triggering play intentionally after user interaction
     const initMusic = () => {
         if (musicEnabled && audioRef.current && audioRef.current.paused) {
              audioRef.current.play().catch(e => console.log(e));

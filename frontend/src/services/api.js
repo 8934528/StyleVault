@@ -19,4 +19,16 @@ export const openPackRequest = async (userId) => {
     return response.data;
 };
 
+export const fetchHistory = async (userId) => {
+    const response = await api.get(`/pack/history/${userId}`);
+    return response.data;
+};
+
+export const loginUser = async (username) => {
+    const response = await api.post('/user/login', username, {
+        headers: { 'Content-Type': 'application/json' }
+    });
+    return response.data;
+};
+
 export default api;

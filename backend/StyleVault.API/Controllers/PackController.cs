@@ -28,4 +28,11 @@ public class PackController : ControllerBase
             return BadRequest(new { message = ex.Message });
         }
     }
+
+    [HttpGet("history/{userId}")]
+    public async Task<ActionResult<IEnumerable<PackHistoryDto>>> GetHistory(Guid userId)
+    {
+        var history = await _packService.GetUserHistoryAsync(userId);
+        return Ok(history);
+    }
 }

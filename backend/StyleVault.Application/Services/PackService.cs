@@ -73,4 +73,29 @@ public class PackService(IAppDbContext context, ProbabilityEngine probabilityEng
             })]
         };
     }
+
+    public async Task<IEnumerable<PackHistoryDto>> GetUserHistoryAsync(Guid userId)
+    {
+        var packs = await context.Packs
+            .Where(p => p.UserId == userId)
+            .Include(p => p.PackCards)
+                .ThenInclude(pc => pc.Card)
+            .OrderByDescending(p => p.CreatedAt)
+            .ToListAsync();
+
+        return packs.Select(p => new PackHistoryDto
+        {
+            PackId = p.PackId,
+            CreatedAt = p.CreatedAt,
+            Cost = p.Cost,
+            TotalWon = p.PackCards.Sum(pc => pc.Card.Value),
+            Cards = [.. p.PackCards.OrderBy(pc => pc.SlotIndex).Select(pc => new CardDto
+            {
+                CardId = pc.CardId,
+                CardName = pc.Card.CardName,
+                Value = pc.Card.Value,
+                Rarity = (int)pc.Card.Rarity
+            })]
+        });
+    }
 }

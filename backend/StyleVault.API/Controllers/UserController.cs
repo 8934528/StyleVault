@@ -31,6 +31,27 @@ public class UserController : ControllerBase
         var user = await _context.Users.FirstOrDefaultAsync();
         if (user == null) return NotFound(new { message = "No users exist in DB" });
         
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] string username)
+    {
+        if (string.IsNullOrWhiteSpace(username))
+            return BadRequest(new { message = "Username is required" });
+
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Username.ToLower() == username.ToLower());
+        if (user == null)
+        {
+            user = new StyleVault.Domain.Entities.User
+            {
+                UserId = Guid.NewGuid(),
+                Username = username,
+                Coins = 100 // Starting balance
+            };
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+        }
+
         return Ok(new { userId = user.UserId, username = user.Username, coins = user.Coins });
     }
 }
