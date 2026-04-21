@@ -1,5 +1,9 @@
 .PHONY: all help init run-api run-web run-all test clean
 
+all: help
+
+run: run-all
+
 help:
 	@echo "StyleVault Makefile Commands:"
 	@echo "  make check     - Check if node and dotnet are installed"
@@ -29,7 +33,7 @@ run-api:
 run-web:
 	cd frontend && npm run dev
 
-run-all: init
+run-all:
 	@echo "Starting API and Web (Press Ctrl+C to stop)..."
 	# Using parallel background process for API
 	cd backend/StyleVault.API && dotnet run & cd frontend && npm run dev

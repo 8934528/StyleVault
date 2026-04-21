@@ -8,10 +8,10 @@ public class AppDbContext : DbContext, IAppDbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    public DbSet<User> Users { get; set; }
-    public DbSet<Card> Cards { get; set; }
-    public DbSet<Pack> Packs { get; set; }
-    public DbSet<PackCard> PackCards { get; set; }
+    public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Card> Cards { get; set; } = null!;
+    public DbSet<Pack> Packs { get; set; } = null!;
+    public DbSet<PackCard> PackCards { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
