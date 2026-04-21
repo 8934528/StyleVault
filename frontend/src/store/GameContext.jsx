@@ -1,19 +1,23 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { fetchDefaultUser, fetchBalance } from '../services/api';
+import React, { useState, useEffect } from 'react';
+import { GameContext } from './game-context';
 
-export const GameContext = createContext();
+export { GameContext };
 
 export const GameProvider = ({ children }) => {
     const [user, setUser] = useState(() => {
         const saved = localStorage.getItem('stylevault_user');
-        return saved ? JSON.parse(saved) : null;
+        try {
+            return saved ? JSON.parse(saved) : null;
+        } catch (e) {
+            console.error("Failed to parse user from localStorage", e);
+            return null;
+        }
     });
+    
     const [coins, setCoins] = useState(user?.coins || 0);
-    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (user) {
-            setCoins(user.coins);
             localStorage.setItem('stylevault_user', JSON.stringify(user));
         } else {
             localStorage.removeItem('stylevault_user');
@@ -38,7 +42,7 @@ export const GameProvider = ({ children }) => {
     };
 
     return (
-        <GameContext.Provider value={{ user, coins, updateCoins, isLoading, login, logout }}>
+        <GameContext.Provider value={{ user, coins, updateCoins, login, logout }}>
             {children}
         </GameContext.Provider>
     );

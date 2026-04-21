@@ -4,9 +4,12 @@ import { GameContext } from '../../store/GameContext';
 import { openPackRequest } from '../../services/api';
 import Swal from 'sweetalert2';
 import Button from '../UI/Button';
+import Loader from '../UI/Loader';
+import { useSound } from '../../hooks/useSound';
 
 const PackOpening = () => {
   const { user, coins, updateCoins } = useContext(GameContext);
+  const { playSfx } = useSound();
   const [isOpening, setIsOpening] = useState(false);
   const [wonCards, setWonCards] = useState([]);
   const [revealedIndices, setRevealedIndices] = useState([]);
@@ -41,6 +44,7 @@ const PackOpening = () => {
     setWonCards([]);
     setRevealedIndices([]);
     setPackSummary(null);
+    playSfx('GameStart.mp3');
     abortControllerRef.current = new AbortController();
 
     try {
@@ -58,6 +62,15 @@ const PackOpening = () => {
           setRevealedIndices([0, 1, 2]);
           setPackSummary(result);
           updateCoins(result.newBalance);
+          // Sound based on result
+          if (result.totalWon >= 70) {
+            playSfx('JackpotWin.mp3');
+          } else if (result.totalWon > 0) {
+            playSfx('PriceWin.mp3');
+          } else {
+            playSfx('GameLose.mp3');
+          }
+
           // Show result alert
           const profit = result.totalWon - 20;
           Swal.fire({

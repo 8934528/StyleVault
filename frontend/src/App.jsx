@@ -1,16 +1,18 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { GameContext } from './store/GameContext';
+import { useBackgroundMusic } from './hooks/useSound';
 import logo from '/logo.png'; 
 
 const App = ({ children }) => {
   const { user, coins, isLoading } = useContext(GameContext);
+  const { initMusic } = useBackgroundMusic();
   const navigate = useNavigate();
 
   const isNavDisabled = !user;
 
   return (
-    <div className="app-container">
+    <div className="app-container" onClick={initMusic}>
       <header className="app-header">
         <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
           <img src={logo} alt="StyleVault Logo" height="40" />

@@ -6,7 +6,10 @@ export const useSound = () => {
 
   const playSfx = (soundFile) => {
     if (!sfxEnabled) return;
-    const audio = new Audio(`/src/assets/sounds/${soundFile}`);
+    
+    const audioUrl = new URL(`../assets/sounds/${soundFile}`, import.meta.url).href;
+    const audio = new Audio(audioUrl);
+    
     audio.volume = sfxVolume;
     audio.play().catch(e => console.log('Audio play blocked:', e));
   };
@@ -26,9 +29,14 @@ export const useBackgroundMusic = () => {
 
         audioRef.current.volume = musicVolume;
 
-        if (musicEnabled) {
-            audioRef.current.src = `/src/assets/sounds/Background_Music/${currentTrack}`;
-            audioRef.current.play().catch(e => console.log('BGM blocked by browser:', e));
+        if (musicEnabled && currentTrack) {
+            try {
+                const musicUrl = new URL(`../assets/sounds/Background_Music/${currentTrack}`, import.meta.url).href;
+                audioRef.current.src = musicUrl;
+                audioRef.current.play().catch(e => console.log('BGM blocked by browser:', e));
+            } catch (e) {
+                console.error("Failed to load background music", e);
+            }
         } else {
             audioRef.current.pause();
         }

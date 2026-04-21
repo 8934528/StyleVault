@@ -30,7 +30,7 @@ public class UserController : ControllerBase
     {
         var user = await _context.Users.FirstOrDefaultAsync();
         if (user == null) return NotFound(new { message = "No users exist in DB" });
-        
+        return Ok(user);
     }
 
     [HttpPost("login")]

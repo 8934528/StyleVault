@@ -11,14 +11,39 @@ public static class DbInitializer
 {
     public static async Task InitializeAsync(AppDbContext context)
     {
+        Console.WriteLine("Starting database initialization...");
         // 1. Ensure the database exists (PostgreSQL)
-        await EnsureDatabaseExistsAsync(context);
+        try 
+        {
+            await EnsureDatabaseExistsAsync(context);
+            Console.WriteLine("Database check/creation completed.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error during Database creation check: {ex.Message}");
+        }
 
         // 2. tables if they don't exist
-        await CreateTablesIfNotExistsAsync(context);
+        try
+        {
+            await CreateTablesIfNotExistsAsync(context);
+            Console.WriteLine("Table check/creation completed.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error during Table creation: {ex.Message}");
+        }
 
         // 3. Seed data (users & cards)
-        await SeedDataAsync(context);
+        try
+        {
+            await SeedDataAsync(context);
+            Console.WriteLine("Data seeding completed.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error during Seeding: {ex.Message}");
+        }
     }
 
     private static async Task EnsureDatabaseExistsAsync(AppDbContext context)

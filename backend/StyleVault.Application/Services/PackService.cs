@@ -88,13 +88,13 @@ public class PackService(IAppDbContext context, ProbabilityEngine probabilityEng
             PackId = p.PackId,
             CreatedAt = p.CreatedAt,
             Cost = p.Cost,
-            TotalWon = p.PackCards.Sum(pc => pc.Card.Value),
+            TotalWon = p.PackCards.Sum(pc => pc.Card?.Value ?? 0),
             Cards = [.. p.PackCards.OrderBy(pc => pc.SlotIndex).Select(pc => new CardDto
             {
                 CardId = pc.CardId,
-                CardName = pc.Card.CardName,
-                Value = pc.Card.Value,
-                Rarity = (int)pc.Card.Rarity
+                CardName = pc.Card?.CardName ?? "Unknown",
+                Value = pc.Card?.Value ?? 0,
+                Rarity = (int)(pc.Card?.Rarity ?? 0)
             })]
         });
     }
